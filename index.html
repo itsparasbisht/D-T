@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D & T</title>
+</head>
+<body>
+    <input type="text">
+    <span></span>
+</body>
+</html>
+
+<script>
+    const input = document.querySelector('input')
+    const span = document.querySelector('span')
+    
+    
+    const handleInput = throttle((e) => {
+        span.innerText = e.target.value
+    }, 1000)
+    
+    input.addEventListener('input', handleInput)
+
+    function debounce(callback, delay){
+        let timeout
+        return (...args) => {    // rest operator
+            clearTimeout(timeout)
+            timeout = setTimeout(() => {
+                callback(...args)    // spread operator
+            }, delay)
+        }
+    }
+
+    function throttle(callback, delay){
+        let timeout = null
+        return (...args) => {
+            if(timeout === null){
+                timeout = setTimeout(() => {
+                    callback(...args)
+                    timeout = null
+                }, delay)
+            }
+        }
+    }
+</script>
